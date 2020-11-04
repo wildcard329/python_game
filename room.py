@@ -4,13 +4,17 @@ class Room:
     def __init__(self, name, description):
         self.name = name
         self.description = description
+        self.entered = False
         self.inventory = []
 
     def __str__(self):
         return f"\n{self.name}\n***\n{self.description}\n"
 
     def get_inventory(self):
-        print(self.inventory)
+        if len(self.inventory) > 0:
+            print(self.inventory)
+        else:
+            print("You see nothing of interest in this room.")
 
     def spawn_item(self, item):
         spawn = random.randrange(4)

@@ -12,6 +12,12 @@ class Parser:
         self.inventory = ['i', 'inventory']
         self.examine = ['e', 'examine']
 
+    def print_help_menu(self):
+        print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nTake Item: ['t (item)', 'take (item)']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
+
+    def return_invalid_command(self):
+        print("Invalid command")
+
     def parse(self, player, cmd):
         parsed_cmds = cmd.split(' ')
         action = parsed_cmds[0]
@@ -19,16 +25,16 @@ class Parser:
             if action in self.cardinals:
                 player.move(player.current_room, action)
             elif action in self.help:
-                print("Help: ['h', 'help', 'menu']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nTake Item: ['t (item)', 'take (item)']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
+                self.print_help_menu()
             elif action in self.quit:
                 player.quit()
             elif action in self.search:
-                print(player.current_room)
+                player.explore_room()
                 player.current_room.get_inventory()
             elif action in self.inventory:
-                print(f"{player.name}\nInventory: {player.inventory}")
+                player.show_inventory()
             else:
-                print('Invalid command')
+                self.return_invalid_command()
         else:
             argument = " ".join(parsed_cmds[1:])
             if action in self.drop:
@@ -47,5 +53,5 @@ class Parser:
                 if player.validate_target(argument) == True:
                     player.examine(argument)
             else:
-                print('Invalid command')
+                self.return_invalid_command()
             
