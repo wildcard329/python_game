@@ -53,13 +53,20 @@ class Battle:
             self.defeat()
             self.active = False
 
+    def get_reward(self):
+        reward = self.enemy.inventory
+        gold = self.enemy.gold
+        self.player.gold += gold
+        if len(reward) > 0:
+            self.player.inventory.extend(reward)
+            print(f"Recieved {reward}, {gold} Gold")
+        else:
+            print(f"Recieved {self.enemy.gold} Gold")
+
     def victory(self):
-        spoils = self.enemy.inventory
-        if len(spoils) > 0:
-            self.player.inventory.extend(spoils)
+        self.get_reward()
         self.player.current_room.occupants.remove(self.enemy)
         print(f"Congratulations!!! You have defeated {self.enemy.name}!")
-        print(f"Recieved {spoils}")
 
     def defeat(self):
         print(f"{self.player.name} has fallend in battle...")

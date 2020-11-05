@@ -72,7 +72,7 @@ class Parser:
                 player.equip(target) 
 
     def print_help_menu(self, player, arg2=None):
-        print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nTake Item: ['t (item)', 'take (item)']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
+        print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nBattle Target: ['b (target)', 'battle (target)']\nShop (merchant): ['barter (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nCheck Stats: ['stats']\nTake Item: ['t (item)', 'take (item)']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
 
     def quit(self, player, arg2=None):
         player.quit()
@@ -94,7 +94,10 @@ class Parser:
                     self.argument = argument
 
     def execute_command(self, player):
-        self.commands[self.action](player, self.argument)
+        if self.action in self.commands:
+            self.commands[self.action](player, self.argument)
+        else:
+            self.return_invalid_command()
         self.action = None
         self.argument = None
 
