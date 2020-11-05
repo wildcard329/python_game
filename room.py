@@ -37,11 +37,20 @@ class Room:
     def spawn_merchant(self, merchant):
         self.occupants.append(merchant)
 
+    def not_in_room(self, arg):
+        print(f"{arg} is not in this room.")
+
     def check_inventory_for_item(self, item):
         if item in self.inventory:
             return True
         else:
-            print(f"{item} is not in this room.")
+            self.not_in_room(item)
+
+    def check_occupants_for_character(self, char):
+        if char in self.occupants:
+            return True
+        else:
+            self.not_in_room(char)
 
     def recieve_item(self, item):
         self.inventory.append(item)

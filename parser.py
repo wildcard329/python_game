@@ -63,12 +63,14 @@ class Parser:
                     player.examine(argument)
             elif action in self.battle:
                 if player.validate_target(argument) == True:
-                    battle = Battle(player, characters[argument])
-                    battle.fight()
+                    if player.current_room.check_occupants_for_character(argument) == True:
+                        battle = Battle(player, characters[argument])
+                        battle.fight()
             elif action in self.barter:
                 if player.validate_target(argument) == True:
-                    barter = Barter(player, characters[argument])
-                    barter.trade()
+                    if player.current_room.check_occupants_for_character(argument) == True:
+                        barter = Barter(player, characters[argument])
+                        barter.trade()
             elif action in self.equip:
                 if validate_equipment(loot[argument]) == True:
                     player.equip(argument)
