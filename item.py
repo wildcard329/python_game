@@ -9,12 +9,16 @@ class Item:
 
     def on_take(self):
         print(f"Aquired {self.name}")
+        input()
 
     def on_drop(self):
         print(f"Drooped {self.name}")
+        input()
 
     def on_sell(self):
         print(f"Sold {self.name}")
+        input()
 
     def on_buy(self):
         print(f"Bought {self.name}")
+        input()

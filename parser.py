@@ -1,5 +1,8 @@
 from player import Player
 from catalogue import loot, validate_item
+from npc_roster import characters
+from battle import Battle
+from barter import Barter
 
 class Parser:
     def __init__(self):
@@ -11,6 +14,8 @@ class Parser:
         self.search = ['search']
         self.inventory = ['i', 'inventory']
         self.examine = ['e', 'examine']
+        self.battle = ['b', 'battle']
+        self.barter = ['barter']
 
     def print_help_menu(self):
         print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nTake Item: ['t (item)', 'take (item)']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
@@ -51,6 +56,21 @@ class Parser:
             elif action in self.examine:
                 if player.validate_target(argument) == True:
                     player.examine(argument)
+            elif action in self.battle:
+                if player.validate_target(argument) == True:
+                    battle = Battle(player, characters[argument])
+                    battle.fight()
+                    if player.health <= 0:
+                        player.playing = False
+                    elif characters[argument].health <= 0:
+                        if len(characters[argument].inventory) > 0:
+                            print(f"Recieved {characters[argument].inventory}")
+                            player.inventory.extend(characters[argument].inventory)
+                        player.current_room.occupants.remove(characters[argument])
+            elif action in self.barter:
+                if player.validate_target(argument) == True:
+                    barter = Barter(player, characters[argument])
+                    barter.trade()
             else:
                 self.return_invalid_command()
             

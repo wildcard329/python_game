@@ -19,7 +19,7 @@ class Room:
 
     def get_occupants(self):
         if len(self.occupants) > 0:
-            print(self.occupants)
+            print([occupant.name for occupant in self.occupants])
 
     def spawn_item(self, item):
         spawn = random.randrange(4)

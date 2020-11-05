@@ -9,3 +9,6 @@ class Enemy(NPC):
 
     def attack(self):
         damage = self.atk * randint
+
+    def spawn_loot(self, item):
+        self.inventory.append(item)

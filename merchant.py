@@ -8,11 +8,11 @@ class Merchant(Character):
     def spawn_inventory(self, item):
         self.inventory.append(item)
 
-    def sell(item, value):
+    def sell(self, item, value):
         self.inventory.remove(item)
         self.gold += value
 
-    def buy(item, value):
+    def buy(self, item, value):
         self.inventory.append(item)
         self.gold -= value
 

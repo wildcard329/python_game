@@ -1,10 +1,16 @@
 from catalogue import loot
+from npc_roster import characters
 from merchant import Merchant
 
 class Player(Merchant):
     def __init__(self, name, current_room, health, focus, gold, atk, defense):
         self.name = name
         self.current_room = current_room
+        self.health = health
+        self.focus = focus
+        self.gold = 0
+        self.atk = atk
+        self.defense = defense
         self.playing = False
         self.inventory = []
 
@@ -26,6 +32,9 @@ class Player(Merchant):
 
     def show_inventory(self):
         print(f"{self.name}\nInventory: {self.inventory}")
+
+    def show_gold(self):
+        print(f"Gold: {self.gold}")
 
     def explore_room(self):
         if self.current_room.entered == False:
@@ -56,6 +65,8 @@ class Player(Merchant):
 
     def validate_target(self, target):
         if target in loot:
+            return True
+        elif target in characters:
             return True
         else:
             self.return_invalid()

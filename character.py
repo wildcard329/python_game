@@ -4,7 +4,7 @@ class Character:
         self.current_room = current_room
         self.health = health
         self.focus = focus
-        self.gold = 0
+        self.gold = gold
         self.inventory = []
         self.atk = atk
         self.defense = defense
@@ -23,3 +23,9 @@ class Character:
             self.explore_room()
         else:
             print('You cannot move in that direction.')
+
+    def show_inventory(self):
+        print(f"{self.name}\nInventory: {self.inventory}")
+
+    def show_gold(self):
+        print(f"Gold: {self.gold}")
