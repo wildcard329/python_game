@@ -1,6 +1,8 @@
 from catalogue import loot, validate_item
 from npc_roster import characters
 from merchant import Merchant
+from weapon import Weapon
+from armor import Armor
 
 class Player(Merchant):
     def __init__(self, name, current_room, health, focus, gold, atk, defense):
@@ -13,6 +15,8 @@ class Player(Merchant):
         self.defense = defense
         self.playing = False
         self.inventory = []
+        self.weapon = None
+        self.armor = None
 
     def __str__(self):
         return f"\n{self.name} is in {self.current_room.name}\n"
@@ -35,6 +39,10 @@ class Player(Merchant):
 
     def show_gold(self):
         print(f"Gold: {self.gold}")
+
+    def show_stats(self):
+        print(f"Name: {self.name}\nHealth: {self.health}\nAttack: {self.atk}\nDefense: {self.defense}\nWeapon: {self.weapon}\nArmor: {self.armor}")
+        self.show_gold()
 
     def explore_room(self):
         if self.current_room.entered == False:
@@ -76,3 +84,27 @@ class Player(Merchant):
 
     def drop(self, item):
         self.inventory.remove(item)
+
+    def equip(self, equipment):
+        if isinstance(loot[equipment], Weapon):
+            if self.weapon is not None:
+                self.unequip(self.weapon)
+            self.weapon = equipment
+            self.atk += loot[equipment].atk_rating
+        if isinstance(loot[equipment], Armor):
+            if self.armor is not None:
+                self.unequip(self.armor)
+            self.armor = equipment
+            self.defense += loot[equipment].armor_rating
+        self.inventory.remove(equipment)
+        loot[equipment].on_equip(equipment)
+
+    def unequip(self, equipment):
+        if isinstance(loot[equipment], Weapon):
+            self.weapon = None
+            self.atk -= loot[equipment].atk_rating
+        if isinstance(loot[equipment], Armor):
+            self.armor = None
+            self.defense -= loot[equipment].armor_rating
+        self.inventory.append(equipment)
+        loot[equipment].on_unequip(equipment)

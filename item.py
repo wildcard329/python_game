@@ -7,18 +7,21 @@ class Item:
     def __str__(self):
         return f"{self.name}: {self.description}\nValue: {self.value} Gold"
 
+    def notify(self):
+        input('Press any key to continue.')
+
     def on_take(self):
         print(f"Aquired {self.name}")
-        input()
+        self.notify()
 
     def on_drop(self):
         print(f"Drooped {self.name}")
-        input()
+        self.notify()
 
     def on_sell(self):
         print(f"Sold {self.name}")
-        input()
+        self.notify()
 
     def on_buy(self):
         print(f"Bought {self.name}")
-        input()
+        self.notify()

@@ -66,7 +66,6 @@ class Battle:
             self.show_command_list()
 
             command_input = input('battle> ')
-            input(command_input)
             if command_input in self.actions:
                 self.actions[command_input]()
             else:

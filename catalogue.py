@@ -22,3 +22,9 @@ def validate_item(item):
         return True
     else:
         print("Invalid item")
+
+def validate_equipment(item):
+    if isinstance(item, Weapon) or isinstance(item, Armor):
+        return True
+    else:
+        print(f"You cannot equip {item}")

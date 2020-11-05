@@ -1,8 +1,9 @@
 from player import Player
-from catalogue import loot, validate_item
+from catalogue import loot, validate_item, validate_equipment
 from npc_roster import characters
 from battle import Battle
 from barter import Barter
+from equipment import Equipment
 
 class Parser:
     def __init__(self):
@@ -16,6 +17,8 @@ class Parser:
         self.examine = ['e', 'examine']
         self.battle = ['b', 'battle']
         self.barter = ['barter']
+        self.equip = ['equip']
+        self.stats = ['stats']
 
     def print_help_menu(self):
         print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nTake Item: ['t (item)', 'take (item)']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
@@ -37,6 +40,8 @@ class Parser:
                 player.explore_room()
             elif action in self.inventory:
                 player.show_inventory()
+            elif action in self.stats:
+                player.show_stats()
             else:
                 self.return_invalid_command()
         else:
@@ -71,6 +76,9 @@ class Parser:
                 if player.validate_target(argument) == True:
                     barter = Barter(player, characters[argument])
                     barter.trade()
+            elif action in self.equip:
+                if validate_equipment(loot[argument]) == True:
+                    player.equip(argument)
             else:
                 self.return_invalid_command()
             

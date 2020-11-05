@@ -6,8 +6,8 @@ class Equipment(Item):
 
     def on_equip(self, equipment):
         print(f"Equiped {equipment}")
-        input()
+        self.notify()
 
     def on_unequip(self, equipment):
         print(f"Unequipped {equipment}")
-        input()
+        self.notify()
