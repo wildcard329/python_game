@@ -16,3 +16,4 @@ while playing == True:
         parse_cmd.parse(player, p_cmd)
     if player.playing == False:
         playing = False
+        

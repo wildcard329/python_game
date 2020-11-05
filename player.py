@@ -31,6 +31,10 @@ class Player(Merchant):
         if self.current_room.entered == False:
             print(self.current_room)
             self.current_room.entered = True
+        if len(self.current_room.occupants) > 0:
+            self.current_room.get_occupants()
+        else:
+            self.current_room.get_inventory()
 
     def check_inventory_for_item(self, item):
         if item in self.inventory:

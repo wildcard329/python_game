@@ -1,4 +1,5 @@
 from room import Room
+from npc_roster import characters
 
 room = {
     'outside':  Room("Outside Cave Entrance",
@@ -36,3 +37,15 @@ room["overlook"].spawn_item("ruby")
 room["narrow"].spawn_item("rusty iron dagger")
 room["narrow"].spawn_item("emerald")
 room["treasure"].spawn_item("ruby")
+
+room["outside"].spawn_merchant(characters["Gary"])
+room["foyer"].spawn_enemy("Goblin")
+room["foyer"].spawn_enemy("Goblin")
+room["foyer"].spawn_enemy("Goblin")
+room["foyer"].spawn_enemy("Goblin")
+room["foyer"].spawn_enemy("Goblin")
+room["overlook"].spawn_req_fight("Troll")
+room["narrow"].spawn_enemy("Imp")
+room["narrow"].spawn_enemy("Imp")
+room["narrow"].spawn_enemy("Goblin")
+room["treasure"].spawn_req_fight("Hydra")

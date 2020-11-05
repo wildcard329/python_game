@@ -6,6 +6,7 @@ class Room:
         self.description = description
         self.entered = False
         self.inventory = []
+        self.occupants = []
 
     def __str__(self):
         return f"\n{self.name}\n***\n{self.description}\n"
@@ -16,10 +17,25 @@ class Room:
         else:
             print("You see nothing of interest in this room.")
 
+    def get_occupants(self):
+        if len(self.occupants) > 0:
+            print(self.occupants)
+
     def spawn_item(self, item):
         spawn = random.randrange(4)
         if spawn == 3:
             self.inventory.append(item)
+
+    def spawn_enemy(self, enemy):
+        spawn = random.randrange(4)
+        if spawn > 1:
+            self.occupants.append(enemy)
+
+    def spawn_req_fight(self, enemy):
+        self.occupants.append(enemy)
+
+    def spawn_merchant(self, merchant):
+        self.occupants.append(merchant)
 
     def check_inventory_for_item(self, item):
         if item in self.inventory:

@@ -2,12 +2,10 @@ from enemy import Enemy
 from random import randint
 
 class Monster(Enemy):
-    def __init__(self, name, current_room, health, focus, gold, inventory, atk, defense):
-        super.__init__(name, current_room, health, focus, gold, inventory, atk, defense)
+    def __init__(self, name, current_room, health, focus, gold, atk, defense):
+        super(Monster, self).__init__(name, current_room, health, focus, gold, atk, defense)
         self.attacks = ['bite', 'scratch']
-
-    def attack(self):
-        damage = randint * self.atk
+        self.inventory = []
 
     def bite(self):
         self.attack()
@@ -16,4 +14,3 @@ class Monster(Enemy):
     def scratch(self):
         self.attack()
         self.focus -= 1
-        

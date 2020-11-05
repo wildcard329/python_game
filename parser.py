@@ -30,7 +30,6 @@ class Parser:
                 player.quit()
             elif action in self.search:
                 player.explore_room()
-                player.current_room.get_inventory()
             elif action in self.inventory:
                 player.show_inventory()
             else:
