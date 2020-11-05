@@ -25,12 +25,14 @@ class Battle:
         self.player.health -= enemy_attack
         self.enemy.health -= player_attack
         self.show_battle_stats()
+        self.verify_battle()
 
     def rest(self):
         self.player.health += 10
         enemy_attack = self.enemy.atk * random.randrange(1)
         self.player.health -= enemy_attack
         self.show_battle_stats()
+        self.verify_battle()
 
     def escape(self):
         attempt = random.randrange(10)
@@ -40,15 +42,24 @@ class Battle:
             enemy_attack = self.enemy.atk * random.randrange(5)
             self.player.health -= enemy_attack
             self.show_battle_stats()
+        self.verify_battle()
 
-    def end_battle(self):
-        self.active = False
-        return self.active
+    def verify_battle(self):
+        if self.enemy.health <= 0:
+            self.victory()
+            self.active = False
+        if self.player.health <= 0:
+            self.defeat()
+            self.active = False
+
+    def victory(self):
+        print(f"Congratulations!!! You have defeated {self.enemy.name}!")
+
+    def defeat(self):
+        print(f"{self.player.name} has fallend in battle...")
 
     def fight(self):
         self.active = True
-        if self.player.health <= 0 or self.enemy.health <= 0:
-            self.end_battle()
 
         while self.active == True:
             self.show_battle_stats()

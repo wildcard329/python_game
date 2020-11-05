@@ -1,4 +1,4 @@
-from catalogue import loot
+from catalogue import loot, validate_item
 from npc_roster import characters
 from merchant import Merchant
 
@@ -64,7 +64,7 @@ class Player(Merchant):
             self.return_invalid()
 
     def validate_target(self, target):
-        if target in loot:
+        if validate_item(target) == True:
             return True
         elif target in characters:
             return True

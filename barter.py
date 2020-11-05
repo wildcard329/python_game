@@ -1,6 +1,6 @@
 from player import Player
 from npc_roster import characters
-from catalogue import loot
+from catalogue import loot, validate_item
 
 class Barter:
     def __init__(self, player, merchant):
@@ -24,7 +24,7 @@ class Barter:
         input()
 
     def sell(self, item):
-        if self.player.validate_target(item) == True:
+        if validate_item(item) == True:
             if item in loot:
                 if self.merchant.gold > loot[item].value:
                     self.player.sell(loot[item].name, loot[item].value)
@@ -36,7 +36,7 @@ class Barter:
                 self.not_in_inventory(item, self.player.name)
 
     def buy(self, item):
-        if self.player.validate_target(item) == True:
+        if validate_item(item) == True:
             if item in loot:
                 if self.player.gold > loot[item].value:
                     self.player.buy(loot[item].name, loot[item].value)
@@ -55,7 +55,6 @@ class Barter:
         self.player.show_gold()
         self.merchant.show_inventory()
         self.merchant.show_gold()
-
 
     def trade(self):
         self.trading = True
