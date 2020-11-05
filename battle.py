@@ -7,6 +7,7 @@ class Battle:
     def __init__(self, player, enemy):
         self.player = player
         self.enemy = enemy
+        self.enemy_health = self.enemy.health
         self.active = False
         self.actions = {}
         self.actions['a'] = self.attack
@@ -14,7 +15,7 @@ class Battle:
         self.actions['e'] = self.escape
 
     def show_battle_stats(self):
-        print(f"BATTLE: {self.player.name} vs {self.enemy.name}\n***{self.player.name} health: {self.player.health}\n{self.enemy.name} health: {self.enemy.health}")
+        print(f"BATTLE: {self.player.name} vs {self.enemy.name}\n***{self.player.name} health: {self.player.health}\n{self.enemy.name} health: {self.enemy_health}")
 
     def show_command_list(self):
         print("[a]ttack, [r]est, [e]scape")
@@ -23,7 +24,7 @@ class Battle:
         player_attack = self.player.atk * random.randrange(10)
         enemy_attack = self.enemy.atk * random.randrange(3)
         self.player.health -= enemy_attack
-        self.enemy.health -= player_attack
+        self.enemy_health -= player_attack
         self.show_battle_stats()
         self.verify_battle()
 
@@ -45,7 +46,7 @@ class Battle:
         self.verify_battle()
 
     def verify_battle(self):
-        if self.enemy.health <= 0:
+        if self.enemy_health <= 0:
             self.victory()
             self.active = False
         if self.player.health <= 0:
@@ -53,10 +54,16 @@ class Battle:
             self.active = False
 
     def victory(self):
+        spoils = self.enemy.inventory
+        if len(spoils) > 0:
+            self.player.inventory.extend(spoils)
+        self.player.current_room.occupants.remove(self.enemy)
         print(f"Congratulations!!! You have defeated {self.enemy.name}!")
+        print(f"Recieved {spoils}")
 
     def defeat(self):
         print(f"{self.player.name} has fallend in battle...")
+        self.player.playing = False
 
     def fight(self):
         self.active = True

@@ -65,13 +65,6 @@ class Parser:
                 if player.validate_target(argument) == True:
                     battle = Battle(player, characters[argument])
                     battle.fight()
-                    if player.health <= 0:
-                        player.playing = False
-                    elif characters[argument].health <= 0:
-                        if len(characters[argument].inventory) > 0:
-                            print(f"Recieved {characters[argument].inventory}")
-                            player.inventory.extend(characters[argument].inventory)
-                        player.current_room.occupants.remove(characters[argument])
             elif action in self.barter:
                 if player.validate_target(argument) == True:
                     barter = Barter(player, characters[argument])
