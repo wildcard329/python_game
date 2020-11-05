@@ -4,53 +4,28 @@ from npc_roster import characters
 from battle import Battle
 from barter import Barter
 from equipment import Equipment
-from commands import commands
+from commands_list import commands
 
 class Parser:
     def __init__(self):
-        self.cardinals = ['n', 's', 'e', 'w', 'north', 'south', 'east', 'west']
-        self.help = 'help'
-        self.h = 'h'
-        self.menu = 'menu'
-        self.quit = 'quit'
-        self.q = 'q'
-        self.drop = 'drop'
-        self.d = 'd'
-        self.take = 'take'
-        self.t = 't'
-        self.search = 'search'
-        self.inventory = 'inventory'
-        self.i = 'i'
-        self.examine = 'examine'
-        self.e = 'e'
-        self.battle = 'battle'
-        self.b = 'b'
-        self.barter = 'barter'
-        self.equip = 'equip'
-        self.stats = 'stats'
         self.commands = {}
-        self.commands[self.n] = self.player_move
-        self.commands[self.s] = self.player_move
-        self.commands[self.e] = self.player_move
-        self.commands[self.w] = self.player_move
-        self.commands[self.north] = self.player_move
-        self.commands[self.south] = self.player_move
-        self.commands[self.east] = self.player_move
-        self.commands[self.west] = self.player_move
-        self.commands[self.help] = self.print_help_menu
-        self.commands[self.quit] = self.quit
-        self.commands[self.drop] = self.drop_item
-        self.commands[self.take] = self.take_item
-        self.commands[self.search] = self.search_room
-        self.commands[self.inventory] = self.show_player_inventory
-        self.commands[self.stats] = self.show_player_stats
-        self.commands[self.examine] = self.examine_target
-        self.commands[self.battle] = self.battle_target
-        self.commands[self.barter] = self.barter_target
-        self.commands[self.equip] = self.equip_item
+        self.commands['cardinals'] = self.player_move
+        self.commands['menu'] = self.print_help_menu
+        self.commands['quit'] = self.quit
+        self.commands['drop'] = self.drop_item
+        self.commands['take'] = self.take_item
+        self.commands['search'] = self.search_room
+        self.commands['inventory'] = self.show_player_inventory
+        self.commands['stats'] = self.show_player_stats
+        self.commands['examine'] = self.examine_target
+        self.commands['battle'] = self.battle_target
+        self.commands['barter'] = self.barter_target
+        self.commands['equip'] = self.equip_item
+        self.action = None
+        self.argument = None
 
     def player_move(self, player, direction):
-        player.move(direction)
+        player.move(player.current_room, direction)
 
     def drop_item(self, player, item):
         if validate_item(item) == True:
@@ -92,68 +67,37 @@ class Parser:
                 barter.trade()
 
     def equip_item(self, player, target):
-        if player.validate_equipment(loot[target]) == True:
-            player.equip(target) 
+        if validate_equipment(loot[target]) == True:
+            if player.check_inventory_for_item(target) == True:
+                player.equip(target) 
 
     def print_help_menu(self, player, arg2=None):
         print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nTake Item: ['t (item)', 'take (item)']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
 
+    def quit(self, player, arg2=None):
+        player.quit()
+
     def return_invalid_command(self):
         print("Invalid command")
 
-    def parse(self, player, cmd):
-        parsed_cmds = cmd.split(' ')
-        zr = parsed_cmds[0]
-        action = commands[zr]
-        argument = parsed_cmds[1:]
+    def compute_command(self, player_input):
+        parsed_cmds = player_input.split(' ')
+        arg = parsed_cmds[0]
+        argument = ' '.join(parsed_cmds[1:])
 
-        if self.commands[action]:
-            self.commands[action](player, argument)
-        # if len(parsed_cmds) == 1:
-        #     if action in self.cardinals:
-        #         player.move(player.current_room, action)
-        #     elif action in self.help:
-        #         self.print_help_menu()
-        #     elif action in self.quit:
-        #         player.quit()
-        #     elif action in self.search:
-        #         player.explore_room()
-        #     elif action in self.inventory:
-        #         player.show_inventory()
-        #     elif action in self.stats:
-        #         player.show_stats()
-        #     else:
-        #         self.return_invalid_command()
-        # else:
-        #     argument = " ".join(parsed_cmds[1:])
-        #     if action in self.drop:
-        #         if validate_item(argument) == True:
-        #             if player.check_inventory_for_item(argument) == True:
-        #                 player.drop(argument)
-        #                 player.current_room.recieve_item(argument)
-        #                 loot[argument].on_drop()
-        #     elif action in self.take:
-        #         if validate_item(argument) == True:
-        #             if player.current_room.check_inventory_for_item(argument) == True:
-        #                 player.current_room.remove_item(argument)
-        #                 player.take(argument)
-        #                 loot[argument].on_take()
-        #     elif action in self.examine:
-        #         if player.validate_target(argument) == True:
-        #             player.examine(argument)
-        #     elif action in self.battle:
-        #         if player.validate_target(argument) == True:
-        #             if player.current_room.check_occupants_for_character(characters[argument]) == True:
-        #                 battle = Battle(player, characters[argument])
-        #                 battle.fight()
-        #     elif action in self.barter:
-        #         if player.validate_target(argument) == True:
-        #             if player.current_room.check_occupants_for_character(characters[argument]) == True:
-        #                 barter = Barter(player, characters[argument])
-        #                 barter.trade()
-        #     elif action in self.equip:
-        #         if validate_equipment(loot[argument]) == True:
-        #             player.equip(argument)
-        #     else:
-        #         self.return_invalid_command()
-            
+        for key, value in commands.items():
+            if arg in value:
+                self.action = key
+                if len(parsed_cmds) == 1:
+                    self.argument = arg
+                else:
+                    self.argument = argument
+
+    def execute_command(self, player):
+        self.commands[self.action](player, self.argument)
+        self.action = None
+        self.argument = None
+
+    def parse(self, player, cmd):
+        self.compute_command(cmd)
+        self.execute_command(player)
