@@ -58,7 +58,7 @@ class Barter:
 
     def trade(self):
         self.trading = True
-        print(f"{self.merchant.name}: Welcome, {self.player.name}! How can I help you today? (['buy' or 'sell'])")
+        print(f"{self.merchant.name}: Welcome, {self.player.name}! How can I help you today? (['buy', 'sell', or 'quit'])")
         while self.trading == True:
             self.show_wares()
             command_input = input('barter> ')

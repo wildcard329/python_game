@@ -50,7 +50,7 @@ class Room:
         if char in self.occupants:
             return True
         else:
-            self.not_in_room(char)
+            self.not_in_room(char.name)
 
     def recieve_item(self, item):
         self.inventory.append(item)
