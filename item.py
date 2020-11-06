@@ -25,3 +25,7 @@ class Item:
     def on_buy(self):
         print(f"Bought {self.name}")
         self.notify()
+
+    def on_examine(self, item):
+        print(item)
+        self.notify()

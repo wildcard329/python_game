@@ -29,3 +29,10 @@ class Character:
 
     def show_gold(self):
         print(f"Gold: {self.gold}")
+
+    def check_inventory_for_item(self, item):
+        if item in self.inventory:
+            return True
+        else:
+            print(f"{item} is not in inventory.")
+            

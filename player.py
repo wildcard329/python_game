@@ -57,7 +57,7 @@ class Player(Merchant):
         if item in self.inventory:
             return True
         else:
-            print(f"{item} is not in your inventory.")
+            print(f"{item} is not in inventory.")
     
     def return_invalid(self):
         print("Invalid target")
