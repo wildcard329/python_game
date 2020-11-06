@@ -31,15 +31,15 @@ class Battle:
     def attack(self):
         player_attack = self.player.atk * random.randrange(10)
         enemy_attack = self.enemy.atk * random.randrange(3)
-        self.player.health -= enemy_attack
-        self.enemy_health -= player_attack
+        self.player.health -= enemy_attack -self.player.defense
+        self.enemy_health -= player_attack - self.enemy.defense
         self.show_battle_stats()
         self.verify_battle()
 
     def rest(self):
         self.player.health += 10
         enemy_attack = self.enemy.atk * random.randrange(1)
-        self.player.health -= enemy_attack
+        self.player.health -= enemy_attack -self.player.defense        
         self.show_battle_stats()
         self.verify_battle()
 
@@ -49,7 +49,7 @@ class Battle:
             self.active = False
         else:
             enemy_attack = self.enemy.atk * random.randrange(5)
-            self.player.health -= enemy_attack
+            self.player.health -= enemy_attack -self.player.defense
             self.show_battle_stats()
         self.verify_battle()
 
