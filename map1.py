@@ -37,8 +37,8 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 room['chamber'].e_to = room['overlook']
 room['overlook'].w_to = room['chamber']
-room['dragon'].e_to = room['narrow']
-room['narrow'].w_to = room['dragon']
+room['dragon'].w_to = room['narrow']
+room['narrow'].e_to = room['dragon']
 
 room["outside"].spawn_item("sapphire")
 room["outside"].spawn_item("rusty iron dagger")
