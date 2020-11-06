@@ -2,7 +2,7 @@ from room import Room
 from player import Player
 from item import Item
 from map_parser import Map_Parser
-from map1 import room, map1_intro
+from map1 import room, map1_intro, map1_player_dead, map1_player_won
 
 playing = True
 while playing == True:
@@ -16,4 +16,5 @@ while playing == True:
         parse_cmd = Map_Parser()
         parse_cmd.parse(player, p_cmd)
     if player.playing == False:
+        player.game_over()
         playing = False

@@ -45,8 +45,11 @@ class Map_Parser:
             else:
                 print(f"Recieved {player.current_room.inventory}.")
                 player.inventory.extend(player.current_room.inventory)
+                player.current_room.inventory = []
         else:
             print("Enemies guard this room's contents.")
+        if len(player.inventory) > 20:
+            player.playing = False
 
     def search_room(self, player, arg2=None):
         player.explore_room()
@@ -79,7 +82,7 @@ class Map_Parser:
                 player.equip(target) 
 
     def print_help_menu(self, player, arg2=None):
-        print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nBattle Target: ['b (target)', 'battle (target)']\nShop (merchant): ['barter (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nCheck Stats: ['stats']\nTake Item: ['t (item)', 'take (item)']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
+        print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nBattle Target: ['b (target)', 'battle (target)']\nShop (merchant): ['barter (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nCheck Stats: ['stats']\nTake Item: ['t (item)', 'take (item)']\nTake All Items: ['t all']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
 
     def quit(self, player, arg2=None):
         player.quit()

@@ -13,6 +13,7 @@ class Battle:
         self.enemy_focus = self.enemy.focus
         self.active = False
         self.action = None
+        self.counter = 0
         self.actions = {}
         self.actions['attack'] = self.attack
         self.actions['rest'] = self.rest
@@ -106,6 +107,16 @@ class Battle:
         print(f"{self.player.name} has fallen in battle...")
         self.player.playing = False
 
+    def enemy_special_attack(self):
+        if self.counter == 5 and len(self.enemy.special_attacks) > 0:
+            self.counter = 0
+            attack = random.choice(self.enemy.special_attacks)
+            if self.enemy_focus > abilities[attack]['fatigue']:
+                self.player.health -= self.enemy.atk * random.randrange(4, 5) + abilities[attack]['bonus']
+                self.enemy_focus -= abilities[attack]['fatigue']
+                print(f"{self.enemy.name} used {attack}")
+                self.notify() 
+
     def compute_command(self, player_input):
         for key, value in commands.items():
             if player_input in value:
@@ -119,12 +130,15 @@ class Battle:
         self.action = None
 
     def fight(self):
+        print(self.enemy.special_attacks)
         self.active = True
 
         while self.active == True:
+            self.enemy_special_attack()
             self.show_battle_stats()
             self.show_command_list()
 
             command_input = input('battle> ')
             self.compute_command(command_input)
             self.execute_command()
+            self.counter += 1

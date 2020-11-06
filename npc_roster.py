@@ -6,12 +6,12 @@ characters = {
     "Gary": Merchant("Gary", None, 50, 12, 500, 10, 3),
     "Jill": Merchant("Jill", None, 15, 7, 200, 1, 1),
     "Thug": Enemy("Thug", None, 18, 7, 5, 1, 1),
-    "Goblin": Monster("Goblin", None, 15, 7, 2, 1, 1),
-    "Troll": Monster("Troll", None, 25, 4, 2, 10, 7),
-    "Imp": Monster("Imp", None, 7, 5, 2, 1, 1),
-    "Hydra": Monster("Hydra", None, 100, 50, 25, 10, 25),
+    "Goblin": Monster("Goblin", None, 15, 7, 2, 1, 1, ['bite', 'scratch']),
+    "Troll": Monster("Troll", None, 25, 4, 2, 10, 7, ['clobber']),
+    "Imp": Monster("Imp", None, 7, 5, 2, 1, 1, ['bite', 'scratch']),
+    "Hydra": Monster("Hydra", None, 100, 50, 25, 10, 25, ['strike', 'wrap']),
     "Weapons Master": Enemy("Weapons Master", None, 2000, 75, 52, 100, 91),
-    "Dragon": Monster("Dragon", None, 5000, 100, 2000, 150, 75)
+    "Dragon": Monster("Dragon", None, 5000, 100, 2000, 150, 75, ['fire breath', 'stomp', 'strike', 'chomp'])
 }
 
 characters["Gary"].spawn_inventory("iron dagger")

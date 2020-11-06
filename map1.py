@@ -85,3 +85,11 @@ enemies that on occasion drop loot which will either have
 monetary value or boost your battle performance. Best of luck
 on your adventure!!!""")
     notify()
+
+def map1_player_dead():
+    print("Oh no, you have taken lethal damage...\n\nGAME OVER")
+
+def map1_player_won():
+    print("""Congradulations, you have obtained the lost treasure
+and defeated the dragon, may word of your deeds spread swiftly
+throughout the land, as you are now a dragon slayer.""")
