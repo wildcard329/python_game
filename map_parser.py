@@ -35,11 +35,18 @@ class Map_Parser:
                 loot[item].on_drop()
 
     def take_item(self, player, item):
-        if validate_item(item) == True:
-            if player.current_room.check_inventory_for_item(item) == True:
-                player.take(item)
-                player.current_room.remove_item(item)
-                loot[item].on_take()
+        if len(player.current_room.occupants) == 0:
+            if item != 'all':
+                if validate_item(item) == True:
+                    if player.current_room.check_inventory_for_item(item) == True:
+                        player.take(item)
+                        player.current_room.remove_item(item)
+                        loot[item].on_take()
+            else:
+                print(f"Recieved {player.current_room.inventory}.")
+                player.inventory.extend(player.current_room.inventory)
+        else:
+            print("Enemies guard this room's contents.")
 
     def search_room(self, player, arg2=None):
         player.explore_room()

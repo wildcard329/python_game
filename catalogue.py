@@ -3,7 +3,7 @@ from weapon import Weapon
 from armor import Armor
 
 loot = {
-    "diamond": Item("diamond", "This should be worth something...", 1000),
+    "diamond": Item("diamond", "Wow, I'm rich!!!", 1000),
     "ruby": Item("ruby", "This should be worth something...", 200),
     "emerald": Item("emerald", "This should be worth something...", 75),
     "sapphire": Item("sapphire", "This should be worth something...", 50),
@@ -28,3 +28,4 @@ def validate_equipment(item):
         return True
     else:
         print(f"You cannot equip {item}")
+        

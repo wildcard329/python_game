@@ -73,3 +73,15 @@ room["narrow"].spawn_enemy(characters["Goblin"])
 room["treasure"].spawn_req_fight(characters["Hydra"])
 room["chamber"].spawn_req_fight(characters["Weapons Master"])
 room["dragon"].spawn_req_fight(characters["Dragon"])
+
+def notify():
+    input('Press [enter] to continue.')
+
+def map1_intro():
+    print("""Greetings, adventurer. You have been carefully selected 
+for the quest of finding the lost treasure of the forgotten
+mine. Although you are going in empty-handed, you will find
+enemies that on occasion drop loot which will either have
+monetary value or boost your battle performance. Best of luck
+on your adventure!!!""")
+    notify()
