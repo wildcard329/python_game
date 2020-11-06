@@ -32,3 +32,19 @@ characters["Hydra"].spawn_loot("diamond")
 characters["Thug"].check_inventory_for_equipment()
 characters["Troll"].check_inventory_for_equipment()
 characters["Weapons Master"].check_inventory_for_equipment()
+
+def return_invalid():
+    print("Invalid target")
+
+def validate_barter(target):
+    if isinstance(target, Merchant):
+        return True
+    else:
+        return_invalid()
+
+def validate_battle(target):
+    if isinstance(target, Enemy) or isinstance(target, Monster):
+        return True
+    else:
+        return_invalid()
+        

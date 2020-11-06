@@ -1,13 +1,12 @@
 from player import Player
 from catalogue import loot, validate_item, validate_equipment
-from npc_roster import characters
+from npc_roster import characters, validate_barter, validate_battle
 from battle import Battle
 from barter import Barter
 from equipment import Equipment
 from map_commands import commands
-from parser import Parser
 
-class Map_Parser(Parser):
+class Map_Parser:
     def __init__(self):
         self.commands = {}
         self.action = None
@@ -56,13 +55,15 @@ class Map_Parser(Parser):
             player.examine(target)
 
     def battle_target(self, player, target):
-        if player.validate_target(target) == True:
+        if validate_battle(characters[target]) is True:
+        # if player.validate_target(target) == True:
             if player.current_room.check_occupants_for_character(characters[target]) == True:
                 battle = Battle(player, characters[target])
                 battle.fight()
 
     def barter_target(self, player, target):
-        if player.validate_target(target) == True:
+        # if player.validate_target(target) == True:
+        if validate_barter(characters[target]) is True:
             if player.current_room.check_occupants_for_character(characters[target]) == True:
                 barter = Barter(player, characters[target])
                 barter.trade()

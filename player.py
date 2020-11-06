@@ -44,13 +44,16 @@ class Player(Merchant, Combatant):
         else:
             self.return_invalid()
 
-    def validate_target(self, target):
-        if validate_item(target) == True:
-            return True
-        elif target in characters:
-            return True
-        else:
-            self.return_invalid()
+    # def validate_target(self, target):
+    #     # this method is causing a bug when player makes invalid target
+    #     # if player challenges or tries to interact with a valid target outside
+    #     # range, it gives the error that the target is an invalid item
+    #     if validate_item(target) == True:
+    #         return True
+    #     elif target in characters:
+    #         return True
+    #     else:
+    #         self.return_invalid()
 
     def take(self, item):
         self.inventory.append(item)

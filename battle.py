@@ -20,7 +20,7 @@ class Battle:
         self.actions['special attack'] = self.special_attack
 
     def show_battle_stats(self):
-        print(f"BATTLE: {self.player.name} vs {self.enemy.name}\n***{self.player.name} health: {self.player.health} focus: {self.player.focus}\n{self.enemy.name} health: {self.enemy_health} focus: {self.enemy_focus}")
+        print(f"BATTLE: {self.player.name} vs {self.enemy.name}\n***\n{self.player.name} health: {self.player.health} focus: {self.player.focus}\n{self.enemy.name} health: {self.enemy_health} focus: {self.enemy_focus}")
 
     def show_command_list(self):
         print("[a]ttack, [r]est, [e]scape")
@@ -108,5 +108,4 @@ class Battle:
 
             command_input = input('battle> ')
             self.compute_command(command_input)
-            self.actions[self.action]()
-            self.action = None
+            self.execute_command()
