@@ -11,6 +11,7 @@ class Enemy(NPC, Combatant):
         self.inventory = []
         self.weapon = None
         self.armor = None
+        self.special_attacks = []
 
     def attack(self):
         damage = self.atk * randint

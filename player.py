@@ -12,6 +12,7 @@ class Player(Merchant, Combatant):
         self.inventory = []
         self.weapon = None
         self.armor = None
+        self.special_attacks = []
 
     def __str__(self):
         return f"\n{self.name} is in {self.current_room.name}\n"
@@ -20,8 +21,7 @@ class Player(Merchant, Combatant):
         self.playing = False
 
     def show_stats(self):
-        print(f"Name: {self.name}\nHealth: {self.health}\nAttack: {self.atk}\nDefense: {self.defense}\nWeapon: {self.weapon}\nArmor: {self.armor}")
-        self.show_gold()
+        print(f"Name: {self.name}\nHealth: {self.health}\nAttack: {self.atk}\nDefense: {self.defense}\nWeapon: {self.weapon}\nArmor: {self.armor}\nSpecial Attacks: {self.special_attacks}")
 
     def explore_room(self):
         if self.current_room.entered == False:
@@ -43,17 +43,6 @@ class Player(Merchant, Combatant):
                 self.return_invalid()
         else:
             self.return_invalid()
-
-    # def validate_target(self, target):
-    #     # this method is causing a bug when player makes invalid target
-    #     # if player challenges or tries to interact with a valid target outside
-    #     # range, it gives the error that the target is an invalid item
-    #     if validate_item(target) == True:
-    #         return True
-    #     elif target in characters:
-    #         return True
-    #     else:
-    #         self.return_invalid()
 
     def take(self, item):
         self.inventory.append(item)

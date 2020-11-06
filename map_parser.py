@@ -56,13 +56,11 @@ class Map_Parser:
 
     def battle_target(self, player, target):
         if validate_battle(characters[target]) is True:
-        # if player.validate_target(target) == True:
             if player.current_room.check_occupants_for_character(characters[target]) == True:
                 battle = Battle(player, characters[target])
                 battle.fight()
 
     def barter_target(self, player, target):
-        # if player.validate_target(target) == True:
         if validate_barter(characters[target]) is True:
             if player.current_room.check_occupants_for_character(characters[target]) == True:
                 barter = Barter(player, characters[target])

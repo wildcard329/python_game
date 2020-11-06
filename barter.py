@@ -62,9 +62,7 @@ class Barter:
     def show_wares(self):
         print(f"\n\n***\n{self.merchant.name}'s Shop\n***\n\n'")
         self.player.show_inventory()
-        self.player.show_gold()
         self.merchant.show_inventory()
-        self.merchant.show_gold()
 
     def return_invalid_command(self):
         print('Invalid command')

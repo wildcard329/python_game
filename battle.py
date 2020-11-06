@@ -2,6 +2,7 @@ from player import Player
 from enemy import Enemy
 from npc_roster import characters
 from battle_commands import commands
+from ability_catalogue import abilities
 import random
 
 class Battle:
@@ -19,11 +20,14 @@ class Battle:
         self.actions['help'] = self.help
         self.actions['special attack'] = self.special_attack
 
+    def notify(self):
+        input('Press [enter] to continue')
+
     def show_battle_stats(self):
         print(f"BATTLE: {self.player.name} vs {self.enemy.name}\n***\n{self.player.name} health: {self.player.health} focus: {self.player.focus}\n{self.enemy.name} health: {self.enemy_health} focus: {self.enemy_focus}")
 
     def show_command_list(self):
-        print("[a]ttack, [r]est, [e]scape")
+        print("[a]ttack, [r]est, [e]scape, [sa] (special attack)")
 
     def help(self):
         print("Attack: ['a', 'attack']\nRest: ['r', 'rest']\nEscape: ['e', 'escape']\nSpecial Attack: ['s', 'special', 'sa', 'special attack']\nHelp: ['h', 'help']")
@@ -38,6 +42,7 @@ class Battle:
 
     def rest(self):
         self.player.health += 10
+        self.player.focus += 1
         enemy_attack = self.enemy.atk * random.randrange(1)
         self.player.health -= enemy_attack -self.player.defense        
         self.show_battle_stats()
@@ -54,7 +59,21 @@ class Battle:
         self.verify_battle()
 
     def special_attack(self):
-        pass
+        if len(self.player.special_attacks) > 0:
+            print(f"Select attack {self.player.special_attacks}")
+            attack = input('sa> ')
+            if attack in self.player.special_attacks and self.player.focus > abilities[attack]['fatigue']:
+                self.enemy_health -= self.player.atk * random.randrange(9, 10) + abilities[attack]['bonus']
+                self.player.focus -= abilities[attack]['fatigue']
+                self.player.health -= self.enemy.atk * random.randrange(5)
+                self.show_battle_stats()
+            else:
+                print(f'Cannot perform {attack}')
+                self.notify()
+        else:
+            print("You have no special attacks")
+            self.notify()
+        self.verify_battle()
 
     def verify_battle(self):
         if self.enemy_health <= 0:
