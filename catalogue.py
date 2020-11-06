@@ -13,7 +13,8 @@ loot = {
     "rusty iron armor": Armor("rusty iron armor", "Really bad armor.", 50, 10),
     "iron armor": Armor("iron armor", "It might defend fairly well.", 65, 13),
     "steel armor": Armor("steel armor", "Sturdy line of defense.", 75, 17),
-    "club": Weapon("club", "Great for blunt force trauma", 50, 15)
+    "club": Weapon("club", "Great for blunt force trauma", 50, 15),
+    "steel sword": Weapon("steel sword", "Great weapon...I want it!", 200, 55)
 }
 
 def validate_item(item):

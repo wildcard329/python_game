@@ -77,6 +77,8 @@ class Battle:
     def victory(self):
         if self.enemy.weapon is not None:
             self.enemy.unequip(self.enemy.weapon)
+        if self.enemy.armor is not None:
+            self.enemy.unequip(self.enemy.armor)
         self.get_reward()
         self.player.current_room.occupants.remove(self.enemy)
         print(f"Congratulations!!! You have defeated {self.enemy.name}!")

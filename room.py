@@ -26,6 +26,14 @@ class Room:
         if spawn == 3:
             self.inventory.append(item)
 
+    def spawn_loot(self, item):
+        self.inventory.append(item)
+
+    def mass_spawn_loot(self, item):
+        self.inventory.append(item)
+        self.inventory.append(item)
+        self.inventory.append(item)
+
     def spawn_enemy(self, enemy):
         spawn = random.randrange(4)
         if spawn > 1:
