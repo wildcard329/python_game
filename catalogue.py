@@ -1,8 +1,6 @@
 from item import Item
 from weapon import Weapon
 from armor import Armor
-from room import Room
-from map1 import room
 
 loot = {
     "diamond": Item("diamond", "This should be worth something...", 1000),
@@ -14,7 +12,8 @@ loot = {
     "steel dagger": Weapon("steel dagger", "Could cause some damage.", 45, 10),
     "rusty iron armor": Armor("rusty iron armor", "Really bad armor.", 50, 10),
     "iron armor": Armor("iron armor", "It might defend fairly well.", 65, 13),
-    "steel armor": Armor("steel armor", "Sturdy line of defense.", 75, 17)
+    "steel armor": Armor("steel armor", "Sturdy line of defense.", 75, 17),
+    "club": Weapon("club", "Great for blunt force trauma", 50, 15)
 }
 
 def validate_item(item):

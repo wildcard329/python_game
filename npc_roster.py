@@ -19,6 +19,11 @@ characters["Gary"].spawn_inventory("iron armor")
 characters["Gary"].spawn_inventory("steel armor")
 
 characters["Thug"].spawn_item("iron dagger")
+characters["Thug"].spawn_rare_item("steel dagger")
 characters["Imp"].spawn_rare_item("sapphire")
 characters["Troll"].spawn_item("ruby")
+characters["Troll"].spawn_loot("club")
 characters["Hydra"].spawn_loot("diamond")
+
+characters["Thug"].check_inventory_for_equipment()
+characters["Troll"].check_inventory_for_equipment()

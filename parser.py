@@ -33,3 +33,4 @@ class Parser:
     def parse(self, player, cmd):
         self.compute_command(cmd)
         self.execute_command(player)
+        

@@ -8,10 +8,9 @@ class Character:
         self.inventory = []
         self.atk = atk
         self.defense = defense
-
+    
     def explore_room(self):
         if self.current_room.entered == False:
-            print(self.current_room)
             self.current_room.entered = True
 
     def move(self, current_room, direction):
@@ -35,4 +34,4 @@ class Character:
             return True
         else:
             print(f"{item} is not in inventory.")
-            
+
