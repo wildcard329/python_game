@@ -26,6 +26,10 @@ class Combatant(Character):
         self.inventory.remove(equipment)
         loot[equipment].on_equip(equipment)
 
+    def validate_equipped(self, equipment):
+        if loot[equipment] == self.weapon or loot[equipment] == self.armor:
+            return True
+
     def unequip(self, equipment):
         if isinstance(loot[equipment], Weapon):
             self.weapon = None

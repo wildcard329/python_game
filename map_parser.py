@@ -4,7 +4,7 @@ from npc_roster import characters, validate_barter, validate_battle
 from battle import Battle
 from barter import Barter
 from equipment import Equipment
-from map_commands import commands
+from map_commands import commands, commands2
 
 class Map_Parser:
     def __init__(self):
@@ -23,6 +23,7 @@ class Map_Parser:
         self.commands['battle'] = self.battle_target
         self.commands['barter'] = self.barter_target
         self.commands['equip'] = self.equip_item
+        self.commands['unequip'] = self.unequip_item
 
     def player_move(self, player, direction):
         player.move(player.current_room, direction)
@@ -81,6 +82,10 @@ class Map_Parser:
             if player.check_inventory_for_item(target) == True:
                 player.equip(target) 
 
+    def unequip_item(self, player, target):
+        if loot[target] == player.weapon or loot[target] == player.armor:
+            player.unequip_item(loot[target])
+
     def print_help_menu(self, player, arg2=None):
         print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nBattle Target: ['b (target)', 'battle (target)']\nShop (merchant): ['barter (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nCheck Stats: ['stats']\nTake Item: ['t (item)', 'take (item)']\nTake All Items: ['t all']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
 
@@ -90,18 +95,22 @@ class Map_Parser:
     def return_invalid_command(self):
         print("Invalid command")
 
+    def get_key(self, cmds, s_term):
+        for key, value in cmds.items():
+            if s_term in value:
+                self.action = key
+
     def compute_command(self, player_input):
         parsed_cmds = player_input.split(' ')
         arg = parsed_cmds[0]
         argument = ' '.join(parsed_cmds[1:])
-
-        for key, value in commands.items():
-            if arg in value:
-                self.action = key
-                if len(parsed_cmds) == 1:
-                    self.argument = arg
-                else:
-                    self.argument = argument
+        
+        if len(parsed_cmds) == 1:
+            self.get_key(commands, arg)
+            self.argument = arg
+        else:
+            self.get_key(commands2, arg)
+            self.argument = argument
 
     def execute_command(self, player):
         if self.action in self.commands:

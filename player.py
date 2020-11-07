@@ -54,7 +54,7 @@ class Player(Merchant, Combatant):
     def game_over(self):
         if self.health <= 0:
             print("Oh no, you have taken lethal damage...\n\nGAME OVER")
-        else:
+        elif len(self.inventory) >= 20:
             print("""Congradulations, you have obtained the lost treasure
 and defeated the dragon, may word of your deeds spread swiftly
-throughout the land, as you are now a dragon slayer.""")
+throughout the land, as you claim your new title of dragon slayer.""")
