@@ -33,12 +33,18 @@ class Barter:
         if validate_item(item) == True:
             if self.player.check_inventory_for_item(item) == True:
                 if self.merchant.gold > loot[item].value:
-                    self.player.sell(loot[item].name, loot[item].value)
-                    self.merchant.buy(loot[item].name, loot[item].value)
+                    self.finalize_sell(item)
                     loot[item].on_sell()
                 else:
                     self.merchant_insufficient_funds(self.merchant.name)
                     self.notify()
+            elif item == self.player.weapon or item == self.player.armor:
+                self.player.unequip(item)
+                self.finalize_sell(item)
+
+    def finalize_sell(self, item):
+        self.player.sell(loot[item].name, loot[item].value)
+        self.merchant.buy(loot[item].name, loot[item].value)
 
     def buy(self, item, player, merchant):
         if validate_item(item) == True:
@@ -47,6 +53,7 @@ class Barter:
                     self.player.buy(loot[item].name, loot[item].value)
                     self.merchant.sell(loot[item].name, loot[item].value)
                     loot[item].on_buy()
+                    self.offer_equip(item)
                 else:
                     self.player_insufficient_funds(self.player.name)
                     self.notify()
@@ -66,6 +73,12 @@ class Barter:
 
     def return_invalid_command(self):
         print('Invalid command')
+
+    def offer_equip(self, item):
+        if isinstance(loot[item], Weapon) or isinstance(loot[item], Armor):
+            query = input(f"Equip {item}? [y] [n] ")
+            if query == 'y':
+                self.player.equip(item)
 
     def compute_command(self, player_input):
         parsed_cmds = player_input.split(' ')

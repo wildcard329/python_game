@@ -15,5 +15,3 @@ class Merchant(Character):
     def buy(self, item, value):
         self.inventory.append(item)
         self.gold -= value
-
-    

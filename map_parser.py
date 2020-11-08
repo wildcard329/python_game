@@ -66,13 +66,13 @@ class Map_Parser:
             player.examine(target)
 
     def battle_target(self, player, target):
-        if validate_battle(characters[target]) is True:
+        if validate_battle(target) is True:
             if player.current_room.check_occupants_for_character(characters[target]) == True:
                 battle = Battle(player, characters[target])
                 battle.fight()
 
     def barter_target(self, player, target):
-        if validate_barter(characters[target]) is True:
+        if validate_barter(target) is True:
             if player.current_room.check_occupants_for_character(characters[target]) == True:
                 barter = Barter(player, characters[target])
                 barter.trade()
@@ -104,7 +104,9 @@ class Map_Parser:
         parsed_cmds = player_input.split(' ')
         arg = parsed_cmds[0]
         argument = ' '.join(parsed_cmds[1:])
+        self.get_command(parsed_cmds, arg, argument)
         
+    def get_command(self, parsed_cmds, arg, argument):
         if len(parsed_cmds) == 1:
             self.get_key(commands, arg)
             self.argument = arg

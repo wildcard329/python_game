@@ -18,6 +18,9 @@ class Player(Merchant, Combatant):
     def __str__(self):
         return f"\n{self.name} is in {self.current_room.name}\n"
 
+    def show_inventory(self):
+        print(f"{self.name}\nInventory: {self.inventory}\nGold: {self.gold}\nWeapon: {self.weapon}\nArmor: {self.armor}")
+
     def quit(self):
         self.playing = False
 
