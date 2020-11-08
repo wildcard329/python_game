@@ -14,6 +14,7 @@ class Battle:
         self.active = False
         self.action = None
         self.counter = 0
+        self.enemy_timer = None
         self.actions = {}
         self.actions['attack'] = self.attack
         self.actions['rest'] = self.rest
@@ -34,19 +35,32 @@ class Battle:
         print("Attack: ['a', 'attack']\nRest: ['r', 'rest']\nEscape: ['e', 'escape']\nSpecial Attack: ['s', 'special', 'sa', 'special attack']\nHelp: ['h', 'help']")
 
     def attack(self):
-        player_attack = self.player.atk * random.randrange(10)
-        enemy_attack = self.enemy.atk * random.randrange(3)
-        self.player.health -= enemy_attack -self.player.defense
-        self.enemy_health -= player_attack - self.enemy.defense
-        self.show_battle_stats()
+        self.player_combat()
+        self.enemy_combat()
         self.verify_battle()
 
+    def calculate_enemy_damage(self, atk):
+        if atk < self.player.defense:
+            atk = self.player.defense
+
+    def calculate_player_damage(self, atk):
+        if atk < self.enemy.defense:
+            at = self.enemy.defense
+
+    def enemy_combat(self):
+        enemy_atk = self.enemy.atk * random.randrange(5)
+        self.calculate_enemy_damage(enemy_atk)
+        self.player.health -= enemy_atk - self.player.defense
+
+    def player_combat(self):
+        player_atk = self.player.atk * random.randrange(10)
+        self.calculate_player_damage(player_atk)
+        self.enemy_health -= player_atk - self.enemy.defense
+
     def rest(self):
-        self.player.health += 10
-        self.player.focus += 1
-        enemy_attack = self.enemy.atk * random.randrange(1)
-        self.player.health -= enemy_attack -self.player.defense        
-        self.show_battle_stats()
+        self.player.health += 100
+        self.player.focus += 10
+        self.enemy_combat()
         self.verify_battle()
 
     def escape(self):
@@ -54,10 +68,8 @@ class Battle:
         if attempt > 2:
             self.active = False
         else:
-            enemy_attack = self.enemy.atk * random.randrange(5)
-            self.player.health -= enemy_attack -self.player.defense
-            self.show_battle_stats()
-        self.verify_battle()
+            self.enemy_combat()
+            self.verify_battle()
 
     def special_attack(self):
         if len(self.player.special_attacks) > 0:
@@ -67,20 +79,21 @@ class Battle:
                 self.enemy_health -= self.player.atk * random.randrange(9, 10) + abilities[attack]['bonus']
                 self.player.focus -= abilities[attack]['fatigue']
                 self.player.health -= self.enemy.atk * random.randrange(5)
-                self.show_battle_stats()
             else:
                 print(f'Cannot perform {attack}')
                 self.notify()
+                self.verify_battle()
         else:
             print("You have no special attacks")
             self.notify()
-        self.verify_battle()
 
     def verify_battle(self):
         if self.enemy_health <= 0:
+            self.enemy_health = 0
             self.victory()
             self.active = False
         if self.player.health <= 0:
+            self.player.health = 0
             self.defeat()
             self.active = False
 
@@ -108,7 +121,9 @@ class Battle:
         self.player.playing = False
 
     def enemy_special_attack(self):
-        if self.counter == 5 and len(self.enemy.special_attacks) > 0:
+        if self.counter == 0:
+            self.enemy_timer = random.randrange(1, 6)
+        if self.counter == self.enemy_timer and len(self.enemy.special_attacks) > 0:
             self.counter = 0
             attack = random.choice(self.enemy.special_attacks)
             if self.enemy_focus > abilities[attack]['fatigue']:
@@ -116,6 +131,7 @@ class Battle:
                 self.enemy_focus -= abilities[attack]['fatigue']
                 print(f"{self.enemy.name} used {attack}")
                 self.notify() 
+                self.verify_battle()
 
     def compute_command(self, player_input):
         for key, value in commands.items():
@@ -130,7 +146,9 @@ class Battle:
         self.action = None
 
     def fight(self):
-        print(self.enemy.special_attacks)
+        self.enemy.check_inventory_for_weapon()
+        self.enemy.check_inventory_for_armor()
+        print(f"Enemy Armor: {self.enemy.armor}\nEnemy Inventory: {self.enemy.inventory}")
         self.active = True
 
         while self.active == True:

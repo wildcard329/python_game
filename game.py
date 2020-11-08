@@ -2,13 +2,13 @@ from room import Room
 from player import Player
 from item import Item
 from map_parser import Map_Parser
-from map1 import room, map1_intro, map1_player_dead, map1_player_won
+from map1 import room, map1_intro
 
 playing = True
 while playing == True:
     map1_intro()
     name = input('Enter a player name ')
-    player = Player(name, room['outside'], 50, 18, 0, 10, 8)
+    player = Player(name, room['outside'], 1500, 180, 50, 10, 8)
     player.explore_room()
     player.playing = True
     while player.playing == True:
