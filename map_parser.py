@@ -87,7 +87,7 @@ class Map_Parser:
             player.unequip_item(loot[target])
 
     def print_help_menu(self, player, arg2=None):
-        print("Help: ['h', 'help', 'menu']\nExamine target: ['e (target)', 'examine (target)']\nBattle Target: ['b (target)', 'battle (target)']\nShop (merchant): ['barter (target)']\nMove: ['n', 's', 'e', 'w']\nCheck Inventory: ['i', 'inventory']\nCheck Stats: ['stats']\nTake Item: ['t (item)', 'take (item)']\nTake All Items: ['t all']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
+        print("Help: ['h', 'help', 'menu']\nExamine target: ['ex (target)', 'examine (target)']\nBattle Target: ['b (target)', 'battle (target)']\nShop (merchant): ['barter (target)', 'ba (target)', 'shop (target), 's (target)']\nMove: ['n', 's', 'e', 'w', 'north', 'south', 'east', 'west']\nCheck Inventory: ['i', 'inventory']\nCheck Stats: ['stats', 'st']\nTake Item: ['t (item)', 'take (item)']\nTake All Items: ['t all']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
 
     def quit(self, player, arg2=None):
         player.quit()

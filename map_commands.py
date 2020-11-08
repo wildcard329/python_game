@@ -3,7 +3,7 @@ commands = {
     'menu': ['menu', 'h', 'help'],
     'quit': ['quit', 'q'],
     'search': ['search'],
-    'stats': ['stats'],
+    'stats': ['stats', 'st'],
     'inventory': ['inventory', 'i']
 }
 
@@ -13,6 +13,6 @@ commands2 = {
     'examine': ['examine', 'ex'],
     'battle': ['battle', 'b'],
     'equip': ['equip', 'e'],
-    'barter': ['barter', 'ba'],
+    'barter': ['barter', 'ba', 'shop', 's'],
     'unequip': ['uneqpip', 'u', 'ue']
 }
