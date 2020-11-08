@@ -3,7 +3,7 @@ from enemy import Enemy
 from monster import Monster
 
 characters = {
-    "Gary": Merchant("Gary", None, 50, 12, 5000, 10, 3),
+    "Gary": Merchant("Gary", None, 50, 12, 15000, 10, 3),
     "Jill": Merchant("Jill", None, 15, 7, 200, 1, 1),
     "Thug": Enemy("Thug", None, 180, 7, 5, 1, 1),
     "Goblin": Monster("Goblin", None, 150, 7, 2, 1, 1, ['bite', 'scratch']),
@@ -19,6 +19,7 @@ characters["Gary"].spawn_inventory("steel dagger")
 characters["Gary"].spawn_inventory("rusty iron armor")
 characters["Gary"].spawn_inventory("iron armor")
 characters["Gary"].spawn_inventory("steel armor")
+characters["Gary"].spawn_inventory("plasma cutter")
 
 characters["Thug"].spawn_item("iron dagger")
 characters["Thug"].spawn_rare_item("steel dagger")

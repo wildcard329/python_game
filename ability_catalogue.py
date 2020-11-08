@@ -10,5 +10,7 @@ abilities = {
     'wrap':     {'bonus': 8, 'fatigue': 4},
     'fire breath': {'bonus': 15, 'fatigue': 10},
     'stomp':     {'bonus': 9, 'fatigue': 5},
-    'chomp':     {'bonus': 11, 'fatigue': 3}
+    'chomp':     {'bonus': 11, 'fatigue': 3},
+    'slice and dice':   {'bonus': 2000, 'fatigue': 100},
+    'skewer':   {'bonus': 1500, 'fatigue': 80}
 }
