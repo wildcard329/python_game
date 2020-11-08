@@ -4,8 +4,8 @@ from weapon import Weapon
 from armor import Armor
 
 class Combatant(Character):
-    def __init__(self, name, current_room, health, focus, gold, atk, defense):
-        super(Combatant, self).__init__(name, current_room, health, focus, gold, atk, defense)
+    def __init__(self, name, current_room, health, focus, gold, atk, defense, description):
+        super(Combatant, self).__init__(name, current_room, health, focus, gold, atk, defense, description)
         self.weapon = None
         self.armor = None
         self.inventory = []

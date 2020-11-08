@@ -1,8 +1,8 @@
 from character import Character
 
 class Merchant(Character):
-    def __init__(self, name, current_room, health, focus, gold, atk, defense):
-        super(Merchant, self).__init__(name, current_room, health, focus, gold, atk, defense)
+    def __init__(self, name, current_room, health, focus, gold, atk, defense, description):
+        super(Merchant, self).__init__(name, current_room, health, focus, gold, atk, defense, description)
         self.inventory = []
 
     def spawn_inventory(self, item):

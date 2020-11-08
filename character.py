@@ -1,5 +1,5 @@
 class Character:
-    def __init__(self, name, current_room, health, focus, gold, atk, defense):
+    def __init__(self, name, current_room, health, focus, gold, atk, defense, description):
         self.name = name
         self.current_room = current_room
         self.health = health
@@ -8,6 +8,10 @@ class Character:
         self.inventory = []
         self.atk = atk
         self.defense = defense
+        self.description = description
+
+    def __str__(self):
+        return f"Name: {self.name}\nClass: {type(self).__name__}\nDescription: {self.description}"
 
     def explore_room(self):
         if self.current_room.entered == False:

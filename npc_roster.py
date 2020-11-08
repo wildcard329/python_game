@@ -3,15 +3,15 @@ from enemy import Enemy
 from monster import Monster
 
 characters = {
-    "Gary": Merchant("Gary", None, 50, 12, 15000, 10, 3),
-    "Jill": Merchant("Jill", None, 15, 7, 200, 1, 1),
-    "Thug": Enemy("Thug", None, 180, 7, 5, 1, 1),
-    "Goblin": Monster("Goblin", None, 150, 7, 2, 1, 1, ['bite', 'scratch']),
-    "Troll": Monster("Troll", None, 250, 4, 2, 10, 7, ['clobber']),
-    "Imp": Monster("Imp", None, 70, 5, 2, 1, 1, ['bite', 'scratch']),
-    "Hydra": Monster("Hydra", None, 2500, 50, 25, 10, 25, ['strike', 'wrap']),
-    "Weapons Master": Enemy("Weapons Master", None, 2000, 75, 52, 100, 91),
-    "Dragon": Monster("Dragon", None, 5000, 100, 2000, 150, 75, ['fire breath', 'stomp', 'strike', 'chomp'])
+    "Gary": Merchant("Gary", None, 50, 12, 15000, 10, 3, "Here to buy and sell goods."),
+    "Jill": Merchant("Jill", None, 15, 7, 200, 1, 1, "Here to buy and sell goods"),
+    "Thug": Enemy("Thug", None, 180, 7, 5, 1, 1, "Looks kind of menacing."),
+    "Goblin": Monster("Goblin", None, 150, 7, 2, 1, 1, "Just a filthy, green goblin", ['bite', 'scratch']),
+    "Troll": Monster("Troll", None, 250, 4, 2, 10, 7, "Yikes, a troll...", ['clobber']),
+    "Imp": Monster("Imp", None, 70, 5, 2, 1, 1, "Full of mischeif", ['bite', 'scratch']),
+    "Hydra": Monster("Hydra", None, 2500, 50, 25, 10, 25, "If the legends are true, I don't want to fight this.", ['strike', 'wrap']),
+    "Weapons Master": Enemy("Weapons Master", None, 2000, 75, 52, 100, 91, "The renowned weapons expert. I'd hate to be in a dual with him."),
+    "Dragon": Monster("Dragon", None, 5000, 100, 2000, 150, 75, "Well, there's the treasure...and unfortunately the dragon.", ['fire breath', 'stomp', 'strike', 'chomp'])
 }
 
 characters["Gary"].spawn_inventory("iron dagger")

@@ -6,8 +6,8 @@ from weapon import Weapon
 from armor import Armor
 
 class Player(Merchant, Combatant):
-    def __init__(self, name, current_room, health, focus, gold, atk, defense):
-        super(Player, self).__init__(name, current_room, health, focus, gold, atk, defense)
+    def __init__(self, name, current_room, health, focus, gold, atk, defense, description):
+        super(Player, self).__init__(name, current_room, health, focus, gold, atk, defense, description)
         self.playing = False
         self.alive = True
         self.inventory = []
@@ -40,11 +40,10 @@ class Player(Merchant, Combatant):
         print("Invalid target")
 
     def examine(self, target):
-        print(f"Target: {target}")
         if target in loot or target in characters:
             if target in self.inventory or target in self.current_room.inventory:
                 print(loot[target])
-            elif target in self.current_room.occupants and target in characters:
+            elif characters[target] in self.current_room.occupants and target in characters:
                 print(characters[target])
             else:
                 self.return_invalid()
