@@ -1,6 +1,6 @@
 from player import Player
 from catalogue import loot, validate_item, validate_equipment
-from npc_roster import characters, validate_barter, validate_battle
+from npc_roster import characters, validate_barter, validate_battle, is_character
 from battle import Battle
 from barter import Barter
 from equipment import Equipment
@@ -62,7 +62,7 @@ class Map_Parser:
         player.show_stats()
 
     def examine_target(self, player, target):
-        if player.validate_target(target) == True:
+        if is_character(target) == True or validate_item(target) == True:
             player.examine(target)
 
     def battle_target(self, player, target):

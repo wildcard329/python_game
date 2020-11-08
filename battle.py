@@ -153,8 +153,7 @@ class Battle:
         self.action = None
 
     def fight(self):
-        self.enemy.check_inventory_for_weapon()
-        self.enemy.check_inventory_for_armor()
+        self.enemy.equip_gear()
         self.active = True
 
         while self.active == True:

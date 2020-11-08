@@ -4,7 +4,7 @@ from combatant import Combatant
 from random import randint
 from weapon import Weapon
 from armor import Armor
-from catalogue import loot
+from catalogue import loot, validate_equipment
 
 class Enemy(NPC, Combatant):
     def __init__(self, name, current_room, health, focus, gold, atk, defense):
@@ -24,12 +24,8 @@ class Enemy(NPC, Combatant):
         print(f"{self.name} is about to equip {equipment}")
         self.equip(equipment)
 
-    def check_inventory_for_weapon(self):
+    def equip_gear(self):
         for item in self.inventory:
-            if isinstance(loot[item], Weapon):
+            if validate_equipment(loot[item]) == True:
                 self.enemy_equip(item)
-
-    def check_inventory_for_armor(self):
-        for item in self.inventory:
-            if isinstance(loot[item], Armor):
-                self.enemy_equip(item)
+                

@@ -40,9 +40,12 @@ class Player(Merchant, Combatant):
         print("Invalid target")
 
     def examine(self, target):
-        if target in loot:
+        print(f"Target: {target}")
+        if target in loot or target in characters:
             if target in self.inventory or target in self.current_room.inventory:
                 print(loot[target])
+            elif target in self.current_room.occupants and target in characters:
+                print(characters[target])
             else:
                 self.return_invalid()
         else:
