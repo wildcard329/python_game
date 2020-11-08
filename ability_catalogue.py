@@ -12,5 +12,10 @@ abilities = {
     'stomp':     {'bonus': 9, 'fatigue': 5},
     'chomp':     {'bonus': 11, 'fatigue': 3},
     'slice and dice':   {'bonus': 2000, 'fatigue': 100},
-    'skewer':   {'bonus': 1500, 'fatigue': 80}
+    'skewer':   {'bonus': 1500, 'fatigue': 80},
+    'zap':      {'bonus': 500, 'fatigue': 20},
+    'burn':     {'bonus': 500, 'fatigue': 20},
+    'chill':    {'bonus': 500, 'fatigue': 20},
+    'ensnare':  {'bonus': 750, 'fatigue': 50},
+    'summon':   {'bonus': 250, 'fatigue': 15}
 }

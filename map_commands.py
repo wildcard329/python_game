@@ -14,5 +14,6 @@ commands2 = {
     'battle': ['battle', 'b'],
     'equip': ['equip', 'e'],
     'barter': ['barter', 'ba', 'shop', 's'],
-    'unequip': ['uneqpip', 'u', 'ue']
+    'unequip': ['uneqpip', 'u', 'ue'],
+    'read': ["read", 'r']
 }

@@ -8,7 +8,7 @@ playing = True
 while playing == True:
     map1_intro()
     name = input('Enter a player name ')
-    player = Player(name, room['outside'], 1500, 180, 50, 10, 8, "Star of the show.")
+    player = Player(name, room['outside'], 1500, 180, 20000, 10, 8, "Star of the show.")
     player.explore_room()
     player.playing = True
     while player.playing == True:

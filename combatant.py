@@ -34,7 +34,7 @@ class Combatant(Character):
         if isinstance(loot[equipment], Weapon):
             self.weapon = None
             self.atk -= loot[equipment].atk_rating
-            print(f"Lost: {self.special_attacks}")
+            self.remove_weapon_ability(equipment)
             self.special_attacks = []
         if isinstance(loot[equipment], Armor):
             self.armor = None
@@ -45,3 +45,8 @@ class Combatant(Character):
     def add_weapon_ability(self, weapon):
         print(f"Weapon Special Attacks: {loot[weapon].special_attacks}")
         self.special_attacks.extend(loot[weapon].special_attacks)
+
+    def remove_weapon_ability(self, weapon):
+        print(f"Lost: {loot[weapon].special_attacks}")
+        for attack in loot[weapon].special_attacks:
+            self.special_attacks.remove(attack)

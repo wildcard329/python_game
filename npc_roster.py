@@ -4,7 +4,7 @@ from monster import Monster
 
 characters = {
     "Gary": Merchant("Gary", None, 50, 12, 15000, 10, 3, "Here to buy and sell goods."),
-    "Jill": Merchant("Jill", None, 15, 7, 200, 1, 1, "Here to buy and sell goods"),
+    "Rebecca": Merchant("Rebecca", None, 15, 7, 200, 1, 1, "Here to buy and sell goods"),
     "Thug": Enemy("Thug", None, 180, 7, 5, 1, 1, "Looks kind of menacing."),
     "Goblin": Monster("Goblin", None, 150, 7, 2, 1, 1, "Just a filthy, green goblin", ['bite', 'scratch']),
     "Troll": Monster("Troll", None, 250, 4, 2, 10, 7, "Yikes, a troll...", ['clobber']),
@@ -20,6 +20,12 @@ characters["Gary"].spawn_inventory("rusty iron armor")
 characters["Gary"].spawn_inventory("iron armor")
 characters["Gary"].spawn_inventory("steel armor")
 characters["Gary"].spawn_inventory("plasma cutter")
+
+characters["Rebecca"].spawn_inventory("book: zap")
+characters["Rebecca"].spawn_inventory("book: burn")
+characters["Rebecca"].spawn_inventory("book: chill")
+characters["Rebecca"].spawn_inventory("book: ensnare")
+characters["Rebecca"].spawn_inventory("book: summon")
 
 characters["Thug"].spawn_item("iron dagger")
 characters["Thug"].spawn_rare_item("steel dagger")

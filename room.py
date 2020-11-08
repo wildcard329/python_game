@@ -65,3 +65,4 @@ class Room:
 
     def remove_item(self, item):
         self.inventory.remove(item)
+        

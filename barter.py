@@ -27,7 +27,6 @@ class Barter:
 
     def player_insufficient_funds(self, player):
         print(f"{player}: Whoops, I don't have enough gold for that.")
-        self.notify()
 
     def sell(self, item, player, merchant):
         if validate_item(item) == True:
@@ -49,7 +48,7 @@ class Barter:
     def buy(self, item, player, merchant):
         if validate_item(item) == True:
             if self.merchant.check_inventory_for_item(item) == True:
-                if self.player.gold > loot[item].value:
+                if self.player.gold >= loot[item].value:
                     self.player.buy(loot[item].name, loot[item].value)
                     self.merchant.sell(loot[item].name, loot[item].value)
                     loot[item].on_buy()

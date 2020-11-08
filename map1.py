@@ -57,6 +57,7 @@ room["dragon"].mass_spawn_loot("sapphire")
 room["dragon"].mass_spawn_loot("sapphire")
 room["dragon"].mass_spawn_loot("sapphire")
 
+room["outside"].spawn_merchant(characters["Rebecca"])
 room["outside"].spawn_merchant(characters["Gary"])
 room["foyer"].spawn_enemy(characters["Goblin"])
 room["foyer"].spawn_enemy(characters["Goblin"])

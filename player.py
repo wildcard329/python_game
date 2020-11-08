@@ -1,11 +1,12 @@
 from catalogue import loot, validate_item
 from npc_roster import characters
 from merchant import Merchant
+from mage import Mage
 from combatant import Combatant
 from weapon import Weapon
 from armor import Armor
 
-class Player(Merchant, Combatant):
+class Player(Merchant, Combatant, Mage):
     def __init__(self, name, current_room, health, focus, gold, atk, defense, description):
         super(Player, self).__init__(name, current_room, health, focus, gold, atk, defense, description)
         self.playing = False

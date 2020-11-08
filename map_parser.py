@@ -24,6 +24,7 @@ class Map_Parser:
         self.commands['barter'] = self.barter_target
         self.commands['equip'] = self.equip_item
         self.commands['unequip'] = self.unequip_item
+        self.commands['read'] = self.read_book
 
     def player_move(self, player, direction):
         player.move(player.current_room, direction)
@@ -85,6 +86,11 @@ class Map_Parser:
     def unequip_item(self, player, target):
         if loot[target] == player.weapon or loot[target] == player.armor:
             player.unequip_item(loot[target])
+
+    def read_book(self, player, book):
+        if validate_item(book) is True and player.check_inventory_for_item(book) is True:
+            player.read(book)
+            player.drop(book)
 
     def print_help_menu(self, player, arg2=None):
         print("Help: ['h', 'help', 'menu']\nExamine target: ['ex (target)', 'examine (target)']\nBattle Target: ['b (target)', 'battle (target)']\nShop (merchant): ['barter (target)', 'ba (target)', 'shop (target), 's (target)']\nMove: ['n', 's', 'e', 'w', 'north', 'south', 'east', 'west']\nCheck Inventory: ['i', 'inventory']\nCheck Stats: ['stats', 'st']\nTake Item: ['t (item)', 'take (item)']\nTake All Items: ['t all']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")

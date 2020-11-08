@@ -1,6 +1,7 @@
 from item import Item
 from weapon import Weapon
 from armor import Armor
+from book import Book
 
 loot = {
     "diamond": Item("diamond", "Wow, I'm rich!!!", 4000),
@@ -15,10 +16,17 @@ loot = {
     "steel armor": Armor("steel armor", "Sturdy line of defense.", 75, 17),
     "club": Weapon("club", "Great for blunt force trauma", 50, 15, ['bash']),
     "steel sword": Weapon("steel sword", "Great weapon...I want it!", 200, 55, ['slash', 'thrust']),
-    "plasma cutter": Weapon("plasma cutter", "Fear me if you dare!!!", 5000, 2000, ['slice and dice', 'skewer'])
+    "plasma cutter": Weapon("plasma cutter", "Cuts through everything like butter.", 5000, 2000, ['slice and dice', 'skewer']),
+    "book: zap": Book("book: zap", "Teaches reader how to shoot sparks from fingertips", 200, "zap"),
+    "book: burn": Book("book: burn", "Teaches reader how to evoke flames", 200, "burn"),
+    "book: chill": Book("book: chill", "Teaches reader how to use ice attacks", 200, "chill"),
+    "book: ensnare": Book("book: ensnare", "Teaches reader how to trap enemy in a pocket dimension", 1000, "ensnare"),
+    "book: summon": Book("book: summon", "Teaches reader how to summon ensnared enemies", 1000, "summon")
 }
 
 def validate_item(item):
+    print(item)
+    print(item in loot)
     if item in loot:
         return True
     else:
