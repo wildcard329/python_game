@@ -17,16 +17,14 @@ loot = {
     "club": Weapon("club", "Great for blunt force trauma", 50, 15, ['bash']),
     "steel sword": Weapon("steel sword", "Great weapon...I want it!", 200, 55, ['slash', 'thrust']),
     "plasma cutter": Weapon("plasma cutter", "Cuts through everything like butter.", 5000, 2000, ['slice and dice', 'skewer']),
-    "book: zap": Book("book: zap", "Teaches reader how to shoot sparks from fingertips", 200, "zap"),
-    "book: burn": Book("book: burn", "Teaches reader how to evoke flames", 200, "burn"),
-    "book: chill": Book("book: chill", "Teaches reader how to use ice attacks", 200, "chill"),
-    "book: ensnare": Book("book: ensnare", "Teaches reader how to trap enemy in a pocket dimension", 1000, "ensnare"),
-    "book: summon": Book("book: summon", "Teaches reader how to summon ensnared enemies", 1000, "summon")
+    "book: zap": Book("book: zap", "Teaches reader how to shoot sparks from fingertips", 200, "zap", "combat"),
+    "book: burn": Book("book: burn", "Teaches reader how to evoke flames", 200, "burn", "combat"),
+    "book: chill": Book("book: chill", "Teaches reader how to use ice attacks", 200, "chill", "combat"),
+    "book: ensnare": Book("book: ensnare", "Teaches reader how to trap enemy in a pocket dimension", 1000, "ensnare", "non-combat"),
+    "book: summon": Book("book: summon", "Teaches reader how to summon ensnared enemies", 1000, "summon", "non-combat")
 }
 
 def validate_item(item):
-    print(item)
-    print(item in loot)
     if item in loot:
         return True
     else:

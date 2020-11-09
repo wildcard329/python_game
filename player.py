@@ -15,12 +15,35 @@ class Player(Merchant, Combatant, Mage):
         self.weapon = None
         self.armor = None
         self.special_attacks = []
+        self.non_combat_special = []
+        self.trapped = []
+        self.minions = []
 
     def __str__(self):
         return f"\n{self.name} is in {self.current_room.name}\n"
 
     def show_inventory(self):
-        print(f"{self.name}\nInventory: {self.inventory}\nGold: {self.gold}\nWeapon: {self.weapon}\nArmor: {self.armor}")
+        print(f"{self.name}\nInventory: {self.inventory}\nGold: {self.gold}\nWeapon: {self.weapon}\nArmor: {self.armor}")   
+
+    def show_aquired_trapped(self):
+        if len(self.trapped) > 0:
+            print(f"Trapped souls at your disposal: {[char.name for char in self.trapped]}")
+            return True
+        else:
+            print("You have no trapped enemies.")
+
+    def show_aquired_minions(self):
+        if len(self.minions) > 0:
+            print(f"Minions at your disposal: {[char.name for char in self.minions]}")
+
+    def confirm_nc_spells(self):
+        if len(self.non_combat_special) > 0:
+            return True
+        else:
+            print(f"{self} does not have any spells to use outside combat.")
+
+    def show_non_combat_spells(self):
+        print(self.non_combat_special)
 
     def quit(self):
         self.playing = False
@@ -33,8 +56,10 @@ class Player(Merchant, Combatant, Mage):
             print(self.current_room)
             self.current_room.entered = True
         if len(self.current_room.occupants) > 0:
+            self.current_room.show_defeated()
             self.current_room.get_occupants()
         else:
+            self.current_room.show_defeated()
             self.current_room.get_inventory()
 
     def return_invalid(self):

@@ -4,7 +4,8 @@ commands = {
     'quit': ['quit', 'q'],
     'search': ['search'],
     'stats': ['stats', 'st'],
-    'inventory': ['inventory', 'i']
+    'inventory': ['inventory', 'i'],
+    'spell': ['spell', 'spells', 'sp']
 }
 
 commands2 = {

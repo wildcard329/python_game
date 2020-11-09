@@ -7,6 +7,7 @@ class Room:
         self.entered = False
         self.inventory = []
         self.occupants = []
+        self.fallen = []
 
     def __str__(self):
         return f"\n{self.name}\n***\n{self.description}\n"
@@ -16,6 +17,15 @@ class Room:
             print(self.inventory)
         else:
             print("You see nothing of interest in this room.")
+
+    def confirm_defeated(self):
+        if len(self.fallen) > 0:
+            return True
+        else:
+            print("There are no fallen foes here.")
+
+    def show_defeated(self):
+        print([enemy.name for enemy in self.fallen], 'lay motionless on the floor.')
 
     def get_occupants(self):
         if len(self.occupants) > 0:
@@ -65,4 +75,3 @@ class Room:
 
     def remove_item(self, item):
         self.inventory.remove(item)
-        

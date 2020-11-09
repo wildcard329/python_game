@@ -15,7 +15,16 @@ abilities = {
     'skewer':   {'bonus': 1500, 'fatigue': 80},
     'zap':      {'bonus': 500, 'fatigue': 20},
     'burn':     {'bonus': 500, 'fatigue': 20},
-    'chill':    {'bonus': 500, 'fatigue': 20},
-    'ensnare':  {'bonus': 750, 'fatigue': 50},
-    'summon':   {'bonus': 250, 'fatigue': 15}
+    'chill':    {'bonus': 500, 'fatigue': 20}
 }
+
+non_combat_abilities = {
+    'ensnare':  {'target_list_1': 'trapped', 'action_1': 'append', 'target_list_2': 'current_room.fallen', 'action_2': 'remove'},
+    'summon':   {'target_list_1': 'minions', 'action_1': 'append', 'target_list_2': 'trapped', 'action_2': 'remove'}
+}
+
+def validate_map_spell(spell):
+    if spell in non_combat_abilities:
+        return True
+    else:
+        print(f"{spell} is not a spell")

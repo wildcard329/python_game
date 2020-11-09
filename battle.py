@@ -121,6 +121,7 @@ class Battle:
             self.enemy.unequip(self.enemy.armor)
         self.get_reward()
         self.player.current_room.occupants.remove(self.enemy)
+        self.player.current_room.fallen.append(self.enemy)
         print(f"Congratulations!!! You have defeated {self.enemy.name}!")
 
     def defeat(self):

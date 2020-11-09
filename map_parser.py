@@ -5,6 +5,7 @@ from battle import Battle
 from barter import Barter
 from equipment import Equipment
 from map_commands import commands, commands2
+from ability_catalogue import non_combat_abilities, validate_map_spell
 
 class Map_Parser:
     def __init__(self):
@@ -25,6 +26,7 @@ class Map_Parser:
         self.commands['equip'] = self.equip_item
         self.commands['unequip'] = self.unequip_item
         self.commands['read'] = self.read_book
+        self.commands['spell'] = self.spell
 
     def player_move(self, player, direction):
         player.move(player.current_room, direction)
@@ -91,6 +93,35 @@ class Map_Parser:
         if validate_item(book) is True and player.check_inventory_for_item(book) is True:
             player.read(book)
             player.drop(book)
+
+    def spell(self, player, arg=None):
+        if player.confirm_nc_spells() is True:
+            if player.current_room.confirm_defeated() is True or player.show_aquired_trapped() is True:
+                player.show_non_combat_spells()
+                spell = input('Which spell? ')
+                player.current_room.show_defeated()
+                player.show_aquired_trapped()
+                target = input('Which target? ')
+                self.get_spell_targets(spell, target, player)
+
+    def get_spell_targets(self, spell, target, player):
+        if validate_map_spell(spell) is True and validate_battle(target) is True:
+            list_1 = non_combat_abilities[spell]['target_list_1']
+            action_1 = non_combat_abilities[spell]['action_1']
+            list_2 = non_combat_abilities[spell]['target_list_2']
+            action_2 = non_combat_abilities[spell]['action_2']
+            self.execute_spell(list_1, action_1, list_2, action_2, target, player)
+
+    def execute_spell(self, l1, a1, l2, a2, target, player):
+        target = characters[target]
+        if l1 == 'trapped' and a1 == 'append' and l2 == 'current_room.fallen' and a2 == 'remove':
+            player.trapped.append(target)
+            player.current_room.fallen.remove(target)
+            player.show_aquired_trapped()
+        elif l1 == 'minions' and a1 == 'append' and l2 == 'trapped' and a2 == 'remove':
+            player.minions.append(target)
+            player.trapped.remove(target)
+            player.show_aquired_minions()
 
     def print_help_menu(self, player, arg2=None):
         print("Help: ['h', 'help', 'menu']\nExamine target: ['ex (target)', 'examine (target)']\nBattle Target: ['b (target)', 'battle (target)']\nShop (merchant): ['barter (target)', 'ba (target)', 'shop (target), 's (target)']\nMove: ['n', 's', 'e', 'w', 'north', 'south', 'east', 'west']\nCheck Inventory: ['i', 'inventory']\nCheck Stats: ['stats', 'st']\nTake Item: ['t (item)', 'take (item)']\nTake All Items: ['t all']\nDrop Item: ['d (item)', 'drop (item)']\nQuit: ['q', 'quit']")
