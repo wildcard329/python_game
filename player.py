@@ -56,10 +56,10 @@ class Player(Merchant, Combatant, Mage):
             print(self.current_room)
             self.current_room.entered = True
         if len(self.current_room.occupants) > 0:
-            self.current_room.show_defeated()
             self.current_room.get_occupants()
-        else:
+        if len(self.current_room.fallen) > 0:
             self.current_room.show_defeated()
+        else:
             self.current_room.get_inventory()
 
     def return_invalid(self):

@@ -40,8 +40,6 @@ room['overlook'].w_to = room['chamber']
 room['dragon'].w_to = room['narrow']
 room['narrow'].e_to = room['dragon']
 
-room["outside"].spawn_item("sapphire")
-room["outside"].spawn_item("rusty iron dagger")
 room["foyer"].spawn_item("emerald")
 room["foyer"].spawn_item("rusty iron dagger")
 room["overlook"].spawn_item("ruby")
