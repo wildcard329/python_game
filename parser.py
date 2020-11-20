@@ -5,5 +5,6 @@ class Parser:
         self.argument = None
         
     def parse_command(self):
-        self.action = self.command[0]
-        self.argument = self.command[:1]
+        command = self.command.split(' ')
+        self.action = command[0]
+        self.argument = ''.join(command[:1])
