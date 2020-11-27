@@ -106,11 +106,13 @@ class Battle:
 
     def get_reward(self):
         reward = self.enemy.inventory
+        xp = self.enemy.xp
         gold = self.enemy.gold
         self.player.gold += gold
+        self.player.xp += xp
         if len(reward) > 0:
             self.player.inventory.extend(reward)
-            print(f"Recieved {reward}, {gold} Gold")
+            print(f"Recieved {reward}, {xp} XP, {gold} Gold")
         else:
             print(f"Recieved {self.enemy.gold} Gold")
 
@@ -120,6 +122,7 @@ class Battle:
         if self.enemy.armor is not None:
             self.enemy.unequip(self.enemy.armor)
         self.get_reward()
+        self.player.levelup()
         self.player.current_room.occupants.remove(self.enemy)
         self.player.current_room.fallen.append(self.enemy)
         print(f"Congratulations!!! You have defeated {self.enemy.name}!")
@@ -154,6 +157,7 @@ class Battle:
         self.action = None
 
     def fight(self):
+        print('xp: ',self.enemy.xp)
         self.enemy.equip_gear()
         self.active = True
 

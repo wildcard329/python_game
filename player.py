@@ -18,6 +18,9 @@ class Player(Merchant, Combatant, Mage):
         self.non_combat_special = []
         self.trapped = []
         self.minions = []
+        self.level = 1
+        self.xp = 0
+        self.toNextLevel = self.level * 20
 
     def __str__(self):
         return f"\n{self.name} is in {self.current_room.name}\n"
@@ -49,7 +52,7 @@ class Player(Merchant, Combatant, Mage):
         self.playing = False
 
     def show_stats(self):
-        print(f"Name: {self.name}\nHealth: {self.health}\nAttack: {self.atk}\nDefense: {self.defense}\nWeapon: {self.weapon}\nArmor: {self.armor}\nSpecial Attacks: {self.special_attacks}")
+        print(f"Name: {self.name}\nHealth: {self.health}\nAttack: {self.atk}\nDefense: {self.defense}\nLevel: {self.level}\nNext: {self.xp}/{self.toNextLevel}\nWeapon: {self.weapon}\nArmor: {self.armor}\nSpecial Attacks: {self.special_attacks}")
 
     def explore_room(self):
         if self.current_room.entered == False:
@@ -81,6 +84,16 @@ class Player(Merchant, Combatant, Mage):
 
     def drop(self, item):
         self.inventory.remove(item)
+
+    def levelup(self):
+        if self.xp >= self.toNextLevel:
+            self.xp -= self.toNextLevel
+            self.recalculateNextXP()
+            self.level += 1
+            print(f"{self.name} leveled up! Now at level {self.level}.")
+
+    def recalculateNextXP(self):
+        self.toNextLevel = self.level * 20
 
     def game_over(self):
         if self.health <= 0:

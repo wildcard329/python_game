@@ -7,8 +7,9 @@ from armor import Armor
 from catalogue import loot, validate_equipment
 
 class Enemy(NPC, Combatant):
-    def __init__(self, name, current_room, health, focus, gold, atk, defense, description):
+    def __init__(self, name, current_room, health, focus, gold, atk, defense, description, xp):
         super(Enemy, self).__init__(name, current_room, health, focus, gold, atk, defense, description)
+        self.xp = xp
         self.inventory = []
         self.weapon = None
         self.armor = None
