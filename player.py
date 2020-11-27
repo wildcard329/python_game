@@ -88,8 +88,8 @@ class Player(Merchant, Combatant, Mage):
     def levelup(self):
         if self.xp >= self.toNextLevel:
             self.xp -= self.toNextLevel
-            self.recalculateNextXP()
             self.level += 1
+            self.recalculateNextXP()
             print(f"{self.name} leveled up! Now at level {self.level}.")
 
     def recalculateNextXP(self):
